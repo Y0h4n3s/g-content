@@ -58,7 +58,6 @@ export default function AuthManager() {
                                 appearance={{ theme: ThemeSupa }}
                                 theme="dark"
                                 providers={[ 'github']} // Optional: add social logins
-                                redirectTo={`${origin}`}
                              />
                         </motion.div>
                     </motion.div>
