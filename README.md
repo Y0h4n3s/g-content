@@ -1,4 +1,7 @@
 # G-content
+
+---
+
 <sup><sup>Disclaimer: Vibe coded</sup></sup>
 g-content is a self-hosted, short-form video feed designed for curated, educational content. It allows users to build a personalized feed from specific YouTube channels, filtering out noise and focusing on personally valuable videos.
 
