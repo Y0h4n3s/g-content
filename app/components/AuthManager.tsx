@@ -14,6 +14,7 @@ export default function AuthManager() {
     const handleLogout = async () => {
         await supabase.auth.signOut();
     };
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
     return (
         <>
@@ -57,7 +58,7 @@ export default function AuthManager() {
                                 appearance={{ theme: ThemeSupa }}
                                 theme="dark"
                                 providers={[ 'github']} // Optional: add social logins
-                                redirectTo={`${location.origin}/auth/callback`}
+                                redirectTo={`${origin}`}
                              />
                         </motion.div>
                     </motion.div>
