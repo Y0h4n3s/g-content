@@ -1,8 +1,7 @@
-# Smart Reels
+# G-content
+<sup><sup>Disclaimer: Vibe coded</sup></sup>
+g-content is a self-hosted, short-form video feed designed for curated, educational content. It allows users to build a personalized feed from specific YouTube channels, filtering out noise and focusing on personally valuable videos.
 
-Smart Reels is a self-hosted, short-form video feed designed for curated, educational content. It allows users to build a personalized feed from specific YouTube channels, filtering out noise and focusing on intellectually valuable videos.
-
-![Smart Reels Demo](https://placehold.co/800x450/1a1a1a/ffffff?text=Smart+Reels+App+Demo.gif)
 
 ## Core Features
 
@@ -63,6 +62,34 @@ These variables are required for the application to connect to Supabase and the 
 ### 5. Deploy
 
 Once the environment variables are set, go to the **Deployments** tab in Vercel and trigger a new deployment. Vercel will build and deploy your application. The cron job defined in `vercel.json` will be automatically scheduled.
+
+---
+
+## Backend Automation on Vercel
+
+The content ingestion worker is designed to run automatically on a schedule using **Vercel Cron Jobs**. This requires no manual setup after deployment.
+
+The configuration is defined in the `vercel.json` file in the root of the repository:
+
+```json
+{
+  "crons": [
+    {
+      "path": "/api/cron/youtube",
+      "schedule": "0 */4 * * *"
+    }
+  ]
+}
+```
+
+**How it works:**
+
+1.  When you deploy the project, Vercel reads this `vercel.json` file.
+2.  It automatically schedules a job to send a `GET` request to the `/api/cron/youtube` endpoint.
+3.  The `schedule` value `"0 */4 * * *"` is a standard cron expression meaning "at minute 0 of every 4th hour" (e.g., at 12:00 AM, 4:00 AM, 8:00 AM, etc.).
+4.  This request triggers the YouTube worker script, which then fetches and saves new content to your database.
+
+You can monitor the execution of your cron jobs in your Vercel project's **Logs** tab.
 
 ---
 
